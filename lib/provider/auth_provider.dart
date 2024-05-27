@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-///import 'package:gtfresh/screens/otp_screen.dart';
+import 'package:blood_donor/screens/otp_screen.dart';
 import 'package:blood_donor/model/user_model.dart';
 import 'package:blood_donor/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,13 +68,13 @@ class AuthProvider extends ChangeNotifier {
         codeSent: ((verificationId, forceResendingToken) {
           _isLoading = false;
 
-          /*
+          
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => OtpScreen(vertificationId: verificationId),
             ),
-          );*/
+          );
         }),
         codeAutoRetrievalTimeout: (vertifcationId) {},
       );
