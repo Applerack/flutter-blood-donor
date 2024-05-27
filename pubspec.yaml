@@ -37,8 +37,14 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_core: ^2.31.1
   firebase_auth: ^4.19.6
+  provider: ^6.0.5
   cloud_firestore: ^4.17.4
+  flutter_spinkit: ^5.0.0
+  shared_preferences: ^2.2.0
   firebase_storage: ^11.7.6
+  material_design_icons_flutter: ^5.0.0
+  image_picker: ^1.0.2
+  country_picker: ^2.0.20
 
 dev_dependencies:
   flutter_test:
@@ -56,16 +62,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  uses-material-design: true  # This line enables Material Design
+  assets:
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
