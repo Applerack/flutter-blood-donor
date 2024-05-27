@@ -28,7 +28,7 @@ class _OtpScreenState extends State<OtpScreen> {
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                      Color.fromARGB(255, 196, 193, 6), // Customize the color
+                      Color.fromARGB(255, 236, 50, 53), // Customize the color
                   size: 50.0, // Customize the size
                 ),
               )
@@ -53,9 +53,9 @@ class _OtpScreenState extends State<OtpScreen> {
                             padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.brown.shade50,
+                              color: Color.fromARGB(176, 202, 164, 164),
                             ),
-                            child: Image.asset("assets/image2.png"),
+                            child: Image.asset("assets/signin.png"),
                           ),
                           const SizedBox(
                             height: 10,
@@ -72,7 +72,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             "Enter vertification code Sent To Your Mobile Number",
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color.fromARGB(255, 114, 111, 0),
+                                color: Color.fromARGB(255, 224, 106, 106),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
@@ -88,7 +88,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                      color: Colors.brown.shade200, width: 2),
+                                      color: Color.fromARGB(124, 244, 67, 54), width: 2),
                                 ),
                                 textStyle: const TextStyle(
                                   fontSize: 20,
@@ -165,7 +165,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
               
               //new user
-             /*
+             
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -173,7 +173,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   (route) => false);
             }
           });
-          
-        })*/
+        });
   }
 }
