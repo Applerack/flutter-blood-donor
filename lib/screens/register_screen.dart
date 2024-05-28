@@ -35,13 +35,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
         TextPosition(offset: phoneController.text.length));
     final _isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
+        
     return Scaffold(
+      appBar:AppBar
+      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
+      backgroundColor: Color.fromARGB(255, 207, 1, 1),
+      elevation: 0,
+      leading: IconButton(onPressed:() {
+        //do somthing
+      },icon: Icon(Icons.menu),),
+      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.person))],),
+
+      backgroundColor: Color.fromARGB(255, 255, 251, 251),
       body: SafeArea(
         child: _isLoading
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                      Color.fromARGB(255, 236, 50, 52), // Customize the color
+                      Color.fromARGB(255, 236, 50, 53), // Customize the color
                   size: 50.0, // Customize the size
                 ),
               )
@@ -49,11 +60,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 // resizeToAvoidBottomInset: false, // Prevent keyboard covering content
                 child: SafeArea(
                   child: SingleChildScrollView(
+                  
                     // Wrap with SingleChildScrollView
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 25, horizontal: 35),
+                            vertical: 25, horizontal: 30),
                         child: Column(
                           children: [
                             Align(
@@ -69,31 +81,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               padding: const EdgeInsets.all(20.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Color.fromARGB(176, 202, 164, 164),
+                                color: Color.fromARGB(174, 119, 72, 72),
                               ),
                               child: Image.asset("assets/signin.png"),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             const Text(
-                              "Login With Phone Number",
+                              "Login with Phone Number",
                               style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w400),
+                                
+                                  fontSize: 23, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             const Text(
-                              "We'll Send You A Vertification Code",
+                              "We'll Send you a vertification Code",
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: Color.fromARGB(255, 224, 106, 106),
+                                  fontStyle: FontStyle.italic,
+                                  color: Color.fromARGB(255, 229, 14, 14),
                                   fontWeight: FontWeight.bold),
                               //textAlign: TextAlign.center,
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 25,
                             ),
                             TextFormField(
                               keyboardType: TextInputType.number,
@@ -103,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               },
                               textAlign: TextAlign.center,
-                              cursorColor: Colors.purple,
+                              cursorColor: Color.fromARGB(255, 216, 12, 12),
                               controller: phoneController,
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
@@ -167,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 30,
                             ),
                             SizedBox(
                               width: double.infinity,
@@ -178,8 +192,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   if (phoneController.text.length > 9) {
                                     sendPhoneNumber();
                                   } else {
-                                    ShowSnackBar(
-                                        context, "Invalid Phone Number");
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Container(
+                                        padding: EdgeInsets.all(16),
+                                        height: 50,
+                                        decoration: BoxDecoration(color:Color.fromARGB(255, 0, 0, 0),
+                                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                                        child:  Text("Invalid mobile Number !")),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: const Color.fromARGB(0, 255, 1, 1),
+                                      elevation: 0,
+                                      )
+                                    );
                                   }
                                 },
                               ),
