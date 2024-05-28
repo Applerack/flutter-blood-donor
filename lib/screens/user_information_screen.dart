@@ -43,6 +43,15 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     final isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
+            appBar:AppBar
+      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
+      backgroundColor: Color.fromARGB(255, 207, 1, 1),
+      elevation: 0,
+      leading: IconButton(onPressed:() {
+        //do somthing
+      },icon: Icon(Icons.menu),),
+      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.person))],),
+      
       body: SafeArea(
         child: isLoading == true
             ? const Center(
@@ -54,7 +63,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
               )
             : SingleChildScrollView(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 25.0, horizontal: 5.0),
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
                 child: Center(
                   child: Column(
                     children: [
@@ -63,11 +72,11 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                         child: image == null
                             ? const CircleAvatar(
                                 backgroundColor:
-                                  Color.fromARGB(176, 202, 164, 164),
+                                  Color.fromARGB(173, 96, 89, 89),
                                 radius: 50,
                                 child: Icon(
                                   Icons.account_circle,
-                                  size: 50,
+                                  size: 90,
                                   color: Colors.white,
                                 ),
                               )
@@ -86,25 +95,26 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                             Text(
                               "Update User Informations",
                               style: TextStyle(
-                                  color: Color.fromARGB(221, 131, 129, 129),
+                                  color: Color.fromARGB(221, 13, 0, 0),
                                   fontSize: 20,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               height: 25,
                             ),
                             // name field
                             textFeld(
-                              hintText: "Enter Your Name Here",
+                              hintText: "Enter your name here",
                               icon: Icons.account_circle,
                               inputType: TextInputType.name,
                               maxLines: 1,
                               controller: nameController,
                             ),
+                            
 
                             // email
                             textFeld(
-                              hintText: "Enter Your Email Here",
+                              hintText: "Enter your Email here",
                               icon: Icons.email,
                               inputType: TextInputType.emailAddress,
                               maxLines: 1,
@@ -177,7 +187,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
           hintText: hintText,
           alignLabelWithHint: true,
           border: InputBorder.none,
-          fillColor: Color.fromARGB(255, 174, 172, 172),
+          fillColor: Color.fromARGB(255, 218, 102, 102),
           filled: true,
         ),
       ),
