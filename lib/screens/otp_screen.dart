@@ -23,6 +23,14 @@ class _OtpScreenState extends State<OtpScreen> {
     final _isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
+            appBar:AppBar
+      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
+      backgroundColor: Color.fromARGB(255, 207, 1, 1),
+      elevation: 0,
+      leading: IconButton(onPressed:() {
+        //do somthing
+      },icon: Icon(Icons.menu),),
+      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.person))],),
       body: SafeArea(
         child: _isLoading == true
             ? const Center(
@@ -37,7 +45,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 25, horizontal: 35),
+                          vertical: 25, horizontal: 30),
                       child: Column(
                         children: [
                           Align(
@@ -50,12 +58,12 @@ class _OtpScreenState extends State<OtpScreen> {
                           Container(
                             width: 170,
                             height: 170,
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color.fromARGB(176, 202, 164, 164),
+                              color: Color.fromARGB(172, 0, 0, 0),
                             ),
-                            child: Image.asset("assets/signin.png"),
+                            child: Image.asset("assets/shield.png"),
                           ),
                           const SizedBox(
                             height: 10,
@@ -72,12 +80,12 @@ class _OtpScreenState extends State<OtpScreen> {
                             "Enter vertification code Sent To Your Mobile Number",
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color.fromARGB(255, 224, 106, 106),
+                                color: Color.fromARGB(255, 14, 203, 8),
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 15,
                           ),
                           Pinput(
                             length: 6,
@@ -88,7 +96,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                      color: Color.fromARGB(124, 244, 67, 54), width: 2),
+                                      color: Color.fromARGB(123, 0, 0, 0), width: 2),
                                 ),
                                 textStyle: const TextStyle(
                                   fontSize: 20,
@@ -110,18 +118,30 @@ class _OtpScreenState extends State<OtpScreen> {
                                   if (otpCode != null) {
                                     vertifyOtp(context, otpCode!);
                                   } else {
-                                    ShowSnackBar(context, "Enter 6 Degit OTP");
+                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Container(
+                                        padding: EdgeInsets.all(16),
+                                        height: 50,
+                                        decoration: BoxDecoration(color:Color.fromARGB(255, 0, 0, 0),
+                                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                                        child:  Text("Enter 6 Digit OTP !")),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: const Color.fromARGB(0, 255, 1, 1),
+                                      elevation: 0,
+                                      )
+                                                                        );
                                   }
                                 }),
                           ),
                           const SizedBox(
-                            height: 10,
+                            height: 15,
                           ),
                           const Text(
                             "Check Your Phone For vertification Code",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
                               color: Colors.black38,
                             ),
                           ),
