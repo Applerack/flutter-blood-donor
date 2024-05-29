@@ -50,7 +50,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
       leading: IconButton(onPressed:() {
         //do somthing
       },icon: Icon(Icons.menu),),
-      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.person))],),
+      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.contact_support))],),
       
       body: SafeArea(
         child: isLoading == true

@@ -44,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       leading: IconButton(onPressed:() {
         //do somthing
       },icon: Icon(Icons.menu),),
-      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.person))],),
+      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.contact_support))],),
 
       backgroundColor: Color.fromARGB(255, 255, 251, 251),
       body: SafeArea(

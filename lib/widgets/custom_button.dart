@@ -11,16 +11,18 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 230, 4, 4)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30.0),
             side: BorderSide(
                 color: Color.fromARGB(255, 224, 34, 34)), // Set the border color here
           ),
         ),
       ),
-      child: Text(text, style: TextStyle(fontSize: 16, color: Colors.black)),
+      child: Text(text, style: TextStyle(fontSize: 16, 
+      fontWeight: FontWeight.bold,
+      color: const Color.fromARGB(255, 255, 255, 255))),
     );
   }
 }
