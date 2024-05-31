@@ -5,6 +5,8 @@ import 'package:blood_donor/model/user_model.dart';
 import 'package:blood_donor/provider/auth_provider.dart';
 import 'package:blood_donor/screens/Home_screen.dart';
 import 'package:blood_donor/utils/utils.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:blood_donor/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -18,10 +20,10 @@ class emergencyScreen extends StatefulWidget {
 }
 
 class _emergencyrequest extends State<emergencyScreen> {
-  //Position? currentLocation;
+Position? currentLocation;
   File? image;
   final pnameController = TextEditingController();
-
+  TextEditingController addressController = TextEditingController();
 
   final groupController = TextEditingController();
 
@@ -152,6 +154,56 @@ class _emergencyrequest extends State<emergencyScreen> {
                 });
               },
             ),
+
+            SizedBox(
+              height: 15,
+            ),
+            if (selectedAddress == 'Enter New Address')
+              textFeldx(
+                state: true,
+                hintText: "Delivery Address",
+                icon: Icons.email_rounded,
+                inputType: TextInputType.emailAddress,
+                maxLines: 1,
+                controller: addressController,
+              ),
+            SizedBox(
+              height: 15,
+            ),
+            if (selectedAddress == 'Use Device Location')
+              currentLocation != null
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'Current Location:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Latitude: ${currentLocation!.latitude}',
+                        ),
+                        Text(
+                          'Longitude: ${currentLocation!.longitude}',
+                        ),
+                        Text(
+                            'https://www.google.com/maps?q=${currentLocation!.latitude},${currentLocation!.longitude}'),
+                        CustomButton(
+                          text: "view on maps",
+                          onPressed: () {
+                            _openLocationInMap(currentLocation!.latitude,
+                                currentLocation!.longitude);
+                          },
+                        )
+                      ],
+                    )
+                  : SpinKitFadingCircle(
+                      color: Color.fromARGB(
+                          255, 196, 193, 6), // Customize the color
+                      size: 25.0, // Customize the size
+                    ),
                             // bio
                             textFeld(
                               hintText: "Wich blood group You need ?",
@@ -222,8 +274,74 @@ class _emergencyrequest extends State<emergencyScreen> {
   }
 
 
+  void _getCurrentLocation() async {
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        LocationPermission permission = await Geolocator.requestPermission();
+      }
+      print(permission);
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
 
+      setState(() {
+        currentLocation = position;
+      });
+    } catch (e) {
+      print('Error fetching location: $e');
+    }
+  }
 
+  void _openLocationInMap(double latitude, double longitude) async {
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
 
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch map');
+    }
+  }
+
+Widget textFeldx({
+    required String hintText,
+    required bool state,
+    required IconData icon,
+    required TextInputType inputType,
+    required int maxLines,
+    required TextEditingController controller,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: TextFormField(
+        readOnly:
+            !state, // Set readOnly to true to make the TextFormField read-only
+        cursorColor: Color.fromARGB(255, 120, 122, 67),
+        controller: controller,
+        keyboardType: inputType,
+        maxLines: maxLines,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
+          hintText: hintText,
+          alignLabelWithHint: true,
+          border: InputBorder.none,
+          fillColor: Color.fromARGB(255, 174, 172, 172),
+          filled: true,
+        ),
+      ),
+    );
+  }
   
 }
