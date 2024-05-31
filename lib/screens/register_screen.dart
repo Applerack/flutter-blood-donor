@@ -38,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         
     return Scaffold(
       appBar:AppBar
-      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
+      (title: const Text("Register For Donation", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, ),),centerTitle: true,
       backgroundColor: Color.fromARGB(255, 207, 1, 1),
       elevation: 0,
       leading: IconButton(onPressed:() {

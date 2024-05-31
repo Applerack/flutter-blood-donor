@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:blood_donor/provider/auth_provider.dart';
 
 import '/screens/register_screen.dart';
+import '/screens/welcome_page.dart';
 
 
 void main() async {
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
               );
             } else {
               if (ap.printuser() == "null") {
-                return RegisterScreen();
+                return Welcomescreen();
               } else {
               
               

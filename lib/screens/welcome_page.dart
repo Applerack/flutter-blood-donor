@@ -12,21 +12,22 @@ class Welcomescreen extends StatelessWidget {
     final ap = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 150, 13, 13), // Set the background color to red
+      backgroundColor: Color.fromARGB(255, 180, 23, 23), // Set the background color to red
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                color: Color.fromARGB(255, 150, 13, 13), // Red background color
-                child: Center(
-                  child: Image.asset(
-                    "assets/welcome.jpg",
-                    height: 300,
-                  ),
-                ),
-              ),
+              child:  Container(
+                              width: 250,
+                              height: 250,
+                              padding: const EdgeInsets.all(20.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromARGB(174, 119, 72, 72),
+                              ),
+                              child: Image.asset("assets/donate.png"),
+                            ),
             ),
             Expanded(
               flex: 1,
