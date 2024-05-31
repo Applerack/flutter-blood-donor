@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:blood_donor/model/user_model.dart';
 import 'package:blood_donor/provider/auth_provider.dart';
-//import 'package:blood_donor/screens/home_screen.dart';
+import 'package:blood_donor/screens/Home_screen.dart';
 import 'package:blood_donor/utils/utils.dart';
 import 'package:blood_donor/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
@@ -43,21 +43,33 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     final isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
-            appBar:AppBar
-      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
-      backgroundColor: Color.fromARGB(255, 207, 1, 1),
-      elevation: 0,
-      leading: IconButton(onPressed:() {
-        //do somthing
-      },icon: Icon(Icons.menu),),
-      actions: [IconButton(onPressed: () {}, icon: Icon (Icons.contact_support))],),
-      
+      appBar: AppBar(
+        title: const Text(
+          "Blood donation App",
+          style: TextStyle(
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 207, 1, 1),
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            //do somthing
+          },
+          icon: Icon(Icons.menu),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.contact_support))
+        ],
+      ),
       body: SafeArea(
         child: isLoading == true
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                        Color.fromARGB(255, 236, 50, 53), // Customize the color
+                      Color.fromARGB(255, 236, 50, 53), // Customize the color
                   size: 50.0, // Customize the size
                 ),
               )
@@ -72,7 +84,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                         child: image == null
                             ? const CircleAvatar(
                                 backgroundColor:
-                                  Color.fromARGB(173, 96, 89, 89),
+                                    Color.fromARGB(173, 96, 89, 89),
                                 radius: 50,
                                 child: Icon(
                                   Icons.account_circle,
@@ -110,7 +122,6 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                               maxLines: 1,
                               controller: nameController,
                             ),
-                            
 
                             // email
                             textFeld(
@@ -213,21 +224,16 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
         userModel: userModel,
         profilePic: image!,
         onSuccess: () {
+          //uncomment this after implement home screen
 
-          //uncomment this after implement home screen 
-
-          /*
           ap.saveUserDataToSP().then((value) => ap.setSignIn().then(
-            
                 (value) => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
+                      builder: (context) => HomePage(),
                     ),
                     (route) => false),
               ));
-
-              */
         },
       );
     } else {
