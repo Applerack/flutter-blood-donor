@@ -32,21 +32,15 @@ class _ContactScreen extends State<ContactScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Blood donation App",
-          style: TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 207, 1, 1),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            // Do something
+           Navigator.pop(context);
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.arrow_back_ios_new),
         ),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.contact_support))],
       ),
@@ -66,13 +60,7 @@ class _ContactScreen extends State<ContactScreen> {
                         vertical: 5, horizontal: 30),
                     child: Column(
                       children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: GestureDetector(
-                            onTap: () => Navigator.of(context).pop(),
-                            child: const Icon(Icons.arrow_back),
-                          ),
-                        ),
+                        
                         Container(
                           width: 70,
                           height: 70,
@@ -99,6 +87,7 @@ class _ContactScreen extends State<ContactScreen> {
                           showDialog(
                             context: context, 
                             builder: (context) => SimpleDialog(
+                              
                               title: const Text("Mobile Number"),
                               contentPadding: const EdgeInsets.all(20.0),
                               children: [

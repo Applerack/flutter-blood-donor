@@ -38,12 +38,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
         
     return Scaffold(
       appBar:AppBar
-      (title: const Text("Register For Donation", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold, ),),centerTitle: true,
+      (
       backgroundColor: Color.fromARGB(255, 207, 1, 1),
-      elevation: 0,
-      leading: IconButton(onPressed:() {
-        //do somthing
-      },icon: Icon(Icons.menu),),
+      leading: IconButton(
+      icon: Icon(Icons.arrow_back_ios_new),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+      
       actions: [IconButton(onPressed: () {}, icon: Icon (Icons.contact_support))],),
 
       backgroundColor: Color.fromARGB(255, 255, 251, 251),
@@ -68,13 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             vertical: 25, horizontal: 30),
                         child: Column(
                           children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: GestureDetector(
-                                onTap: () => Navigator.of(context).pop(),
-                                child: const Icon(Icons.arrow_back),
-                              ),
-                            ),
+                          
                             Container(
                               width: 170,
                               height: 170,

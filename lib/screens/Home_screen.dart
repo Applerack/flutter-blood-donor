@@ -1,31 +1,114 @@
+import 'package:blood_donor/provider/auth_provider.dart';
+import 'package:blood_donor/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
+import 'package:blood_donor/screens/user_information_screen.dart';
+import 'package:blood_donor/screens/contact_us.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Blood Donation',
           style: TextStyle(color: Colors.white), // Set the text color to white
         ),
-        backgroundColor: Color.fromARGB(255, 150, 13, 13),
+        backgroundColor: Color.fromARGB(255, 210, 55, 55),
       ),
+       drawer: Drawer(
+        
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 210, 55, 55),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      backgroundImage: NetworkImage(ap.userModel.profilePic),
+                      radius: 40,
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      ap.userModel.name,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Text(
+                      ap.userModel.email,
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 197, 197, 197),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+             
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text("Edit Account"),
+                onTap: () {
+                 
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserInfromationScreen()));
+
+
+                 
+                },
+              ),
+             
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text("Logout"),
+                onTap: () {
+
+                   ap.userSignOut().then(
+                        (value) => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Welcomescreen(),
+                          ),
+                        ),
+                      );
+                 
+
+                },
+              ),
+            ],
+          ),
+        ),
       body: Column(
         children: <Widget>[
           CarouselSlider(
+            
             items: [
-              'assets/First.jpeg',
-              'assets/image2.png',
-              'assets/phone.png'
+              'assets/imgs1.jpg',
+              'assets/imgs2.png',
+             
             ].map((imagePath) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Image.asset(
+                  return Container(
+                    
+                    child:
+                    Image.asset(
                     imagePath,
-                    height: 200,
-                    width: double.infinity,
+                    height: double.infinity,
+                    
+                    width: 700,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Center(
@@ -35,6 +118,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     },
+                  ),
                   );
                 },
               );
@@ -47,37 +131,33 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              color: Color.fromARGB(255, 150, 13, 13), // Red background color
+              color: Color.fromARGB(255, 210, 55, 55), 
               child: GridView.count(
                 crossAxisCount: 2,
                 padding: EdgeInsets.all(10),
                 children: <Widget>[
-                  _buildGridButton(
-                    icon: Icons.person,
-                    label: 'Profile',
-                    onTap: () {
-                      // Handle Profile button tap
-                    },
-                  ),
+                
                   _buildGridButton(
                     icon: Icons.bloodtype,
                     label: 'Blood Donate',
                     onTap: () {
-                      // Handle Blood Donate button tap
+                     
                     },
                   ),
                   _buildGridButton(
                     icon: Icons.notifications,
                     label: 'Notifications',
                     onTap: () {
-                      // Handle Notifications button tap
+                      
                     },
                   ),
                   _buildGridButton(
-                    icon: Icons.local_hospital,
-                    label: 'Blood Bank',
+                    icon: Icons.call,
+                    label: 'Contact Admin',
                     onTap: () {
-                      // Handle Blood Bank button tap
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ContactScreen()));
+                     
                     },
                   ),
                 ],
@@ -96,7 +176,7 @@ class HomePage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 100, // Specify the height you want for the card
+        height: 100, 
         child: Card(
           color: Colors.white,
           child: Column(
@@ -104,16 +184,16 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               Icon(
                 icon,
-                size: 50, // Adjust the icon size if necessary
+                size: 50, 
                 color: Color.fromARGB(255, 150, 13, 13),
               ),
               SizedBox(
                   height:
-                      5), // Adjust the spacing between icon and text if necessary
+                      5), 
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 16, // Adjust the text size if necessary
+                  fontSize: 16, 
                   color: Color.fromARGB(255, 150, 13, 13),
                 ),
               ),

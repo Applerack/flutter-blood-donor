@@ -1,3 +1,4 @@
+import 'package:blood_donor/screens/Home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donor/provider/auth_provider.dart';
 import 'package:blood_donor/screens/user_information_screen.dart';
@@ -24,12 +25,12 @@ class _OtpScreenState extends State<OtpScreen> {
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
             appBar:AppBar
-      (title: const Text("Blood donation App", style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold,),),centerTitle: true,
+      (
       backgroundColor: Color.fromARGB(255, 207, 1, 1),
       elevation: 0,
       leading: IconButton(onPressed:() {
-        //do somthing
-      },icon: Icon(Icons.menu),),
+       Navigator.pop(context);
+      },icon: Icon(Icons.arrow_back_ios),),
       actions: [IconButton(onPressed: () {}, icon: Icon (Icons.contact_support))],),
       body: SafeArea(
         child: _isLoading == true
@@ -48,13 +49,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           vertical: 25, horizontal: 30),
                       child: Column(
                         children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () => Navigator.of(context).pop(),
-                              child: const Icon(Icons.arrow_back),
-                            ),
-                          ),
+                          
                           Container(
                             width: 170,
                             height: 170,
@@ -164,7 +159,7 @@ class _OtpScreenState extends State<OtpScreen> {
         verificationId: widget.vertificationId,
         userOtp: userOtp,
         onSucces: () {
-          //checking wether the user exits in db
+          
 
           ap.checkExtingUser().then((value) async {
             if (value == true) {
@@ -174,7 +169,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 
                      //here must add navigat to home screen 
 
-
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))
 
 
 

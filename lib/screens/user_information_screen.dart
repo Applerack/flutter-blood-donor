@@ -44,21 +44,17 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Blood donation App",
-          style: TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+       
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 207, 1, 1),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
-            //do somthing
+          
+  Navigator.pop(context);
+
           },
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.arrow_back),
         ),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.contact_support))
