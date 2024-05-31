@@ -65,8 +65,8 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                      Color.fromARGB(255, 236, 50, 53), // Customize the color
-                  size: 50.0, // Customize the size
+                      Color.fromARGB(255, 236, 50, 53), 
+                  size: 50.0, 
                 ),
               )
             : SingleChildScrollView(
@@ -110,7 +110,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                             SizedBox(
                               height: 25,
                             ),
-                            // name field
+                          
                             textFeld(
                               hintText: "Enter your name here",
                               icon: Icons.account_circle,
@@ -119,7 +119,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                               controller: nameController,
                             ),
 
-                            // email
+                           
                             textFeld(
                               hintText: "Enter your Email here",
                               icon: Icons.email,
@@ -127,7 +127,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                               maxLines: 1,
                               controller: emailController,
                             ),
-                            //adress
+                   
                             textFeld(
                               hintText: "Enter your Adress...",
                               icon: Icons.edit,
@@ -135,7 +135,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                               maxLines: 4,
                               controller: adresscontroler,
                             ),
-                            // bio
+                    
                             textFeld(
                               hintText: "Enter your bio here...",
                               icon: Icons.edit,
@@ -201,7 +201,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     );
   }
 
-  // store user data to database
+
   void storeData() async {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     UserModel userModel = UserModel(

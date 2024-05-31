@@ -55,16 +55,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                      Color.fromARGB(255, 236, 50, 53), // Customize the color
-                  size: 50.0, // Customize the size
+                      Color.fromARGB(255, 236, 50, 53), 
+                  size: 50.0, 
                 ),
               )
             : Center(
-                // resizeToAvoidBottomInset: false, // Prevent keyboard covering content
+              
                 child: SafeArea(
                   child: SingleChildScrollView(
                   
-                    // Wrap with SingleChildScrollView
+                  
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

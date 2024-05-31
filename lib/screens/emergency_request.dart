@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:blood_donor/screens/notify_succes.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donor/model/user_model.dart';
 import 'package:blood_donor/provider/auth_provider.dart';
@@ -164,7 +165,7 @@ String selectedAddress = 'Home Address';
             if (selectedAddress == 'Enter New Address')
               textFeldx(
                 state: true,
-                hintText: "Delivery Address",
+                hintText: "Blood Requesting Address",
                 icon: Icons.email_rounded,
                 inputType: TextInputType.emailAddress,
                 maxLines: 1,
@@ -230,23 +231,32 @@ String selectedAddress = 'Home Address';
                           text: "Request Blood",
                           onPressed: () async {
 
-
-                            if(selectedAddress == 'Home Address')
+                             if(groupController.text != "" && pnameController.text != "")
+                             {
+                                if(selectedAddress == 'Home Address')
                             {
-                              await sendMessage(groupController.text , ap.userModel.adress , ap.userModel.email);
+                              await sendMessage(pnameController.text,groupController.text , ap.userModel.adress , ap.userModel.email);
+                               Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => notifySucces()));
                             }
                             else if(selectedAddress == 'Enter New Address')
                             {
-                               await sendMessage(groupController.text , addressController.text , ap.userModel.email);
+                               await sendMessage(pnameController.text, groupController.text , addressController.text , ap.userModel.email);
                             }
                             else if(selectedAddress  == 'Use Device Location')
                             {
                               String link  =  'https://www.google.com/maps?q=${currentLocation!.latitude},${currentLocation!.longitude}';
-                               await sendMessage(groupController.text , link , ap.userModel.email);
+                               await sendMessage(pnameController.text,groupController.text , link , ap.userModel.email);
                             }
                           else {
 
                           }
+                             }
+
+                             else{
+                              ShowSnackBar(context, "Please fill out requested info");
+                             }
+                           
 
                           },
                         ),
@@ -341,7 +351,7 @@ Widget textFeldx({
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
         readOnly:
-            !state, // Set readOnly to true to make the TextFormField read-only
+            !state,
         cursorColor: Color.fromARGB(255, 120, 122, 67),
         controller: controller,
         keyboardType: inputType,
@@ -374,11 +384,13 @@ Widget textFeldx({
    final String botToken = '7409282338:AAGjqSiWYD9MxXucJCJwZzbb_MTywp9RdSE';
   final String chatId = '@emergency_blood_requests';
 
-  Future<void> sendMessage(String bloodType, String location, String contactEmail) async {
+  Future<void> sendMessage(String pname , String bloodType, String location, String contactEmail) async {
     final String message = '''
+      Patient Name :$pname
       Blood Type: $bloodType
       Location: $location
       Contact Email: $contactEmail
+      If have this blood group kindly notify requester via email adress!!God Bless You!!
     ''';
 
     final String telegramURL = 'https://api.telegram.org/bot$botToken/sendMessage';
@@ -394,7 +406,7 @@ Widget textFeldx({
        
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Successfully notified worldwide members'),
-          backgroundColor: Colors.green,
+          backgroundColor: Color.fromARGB(255, 241, 129, 129),
         ));
       } else {
         throw Exception('Failed to send message');

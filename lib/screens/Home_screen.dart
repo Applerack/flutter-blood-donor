@@ -1,6 +1,7 @@
 import 'package:blood_donor/provider/auth_provider.dart';
 import 'package:blood_donor/screens/emergency_request.dart';
 import 'package:blood_donor/screens/welcome_page.dart';
+import 'package:blood_donor/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
@@ -151,6 +152,8 @@ class HomePage extends StatelessWidget {
                     icon: Icons.notifications,
                     label: 'Notifications',
                     onTap: () {
+
+        ShowSnackBar(context, "Please join our telegram channel @emergency_blood_requests for latest News!");
                       
                     },
                   ),
@@ -168,6 +171,8 @@ class HomePage extends StatelessWidget {
                     icon: Icons.bloodtype,
                     label: 'Donate Blood',
                     onTap: () {
+
+                      ShowSnackBar(context, "we will develop this soon as possible , stay tuned with our grithub repository !");
                       
                     },
                   ),

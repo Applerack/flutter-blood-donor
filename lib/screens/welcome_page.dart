@@ -12,7 +12,7 @@ class Welcomescreen extends StatelessWidget {
     final ap = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 180, 23, 23), // Set the background color to red
+      backgroundColor: Color.fromARGB(255, 180, 23, 23), 
       body: SafeArea(
         child: Column(
           children: [
@@ -32,7 +32,7 @@ class Welcomescreen extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.white, // White background color
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
                   child: Column(
@@ -97,7 +97,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18), // Increase the font size of the button text
+        style: TextStyle(fontSize: 18), 
       ),
     );
   }
