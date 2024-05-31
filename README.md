@@ -1,16 +1,13 @@
 # blood_donor
 
-A new Flutter project.
+This is a blood donation mobile application developed with flutter framework
 
-## Getting Started
+We have used : firebase authentication , geolocator , telegram web api , firebase firestore and firebase storage and many more packages and dependencies for build this application.
 
-This project is a starting point for a Flutter application.
+members who contributed for this and index numbers: 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Applerack - MAHNDSE232F-046
+sathiranga - MAHNDSE232F-06
+chamuthu - MAHNDSE232F-036
+dulanga - MAHNDSE232F-05
+            
