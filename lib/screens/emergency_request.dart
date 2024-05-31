@@ -242,11 +242,15 @@ String selectedAddress = 'Home Address';
                             else if(selectedAddress == 'Enter New Address')
                             {
                                await sendMessage(pnameController.text, groupController.text , addressController.text , ap.userModel.email);
+                                 Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => notifySucces()));
                             }
                             else if(selectedAddress  == 'Use Device Location')
                             {
                               String link  =  'https://www.google.com/maps?q=${currentLocation!.latitude},${currentLocation!.longitude}';
                                await sendMessage(pnameController.text,groupController.text , link , ap.userModel.email);
+                                 Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => notifySucces()));
                             }
                           else {
 
