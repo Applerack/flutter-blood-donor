@@ -1,4 +1,5 @@
 import 'package:blood_donor/provider/auth_provider.dart';
+import 'package:blood_donor/screens/emergency_request.dart';
 import 'package:blood_donor/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -138,9 +139,11 @@ class HomePage extends StatelessWidget {
                 children: <Widget>[
                 
                   _buildGridButton(
-                    icon: Icons.bloodtype,
-                    label: 'Blood Donate',
+                    icon: Icons.emergency,
+                    label: 'Request Blood',
                     onTap: () {
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => emergencyScreen()));
                      
                     },
                   ),
@@ -158,6 +161,14 @@ class HomePage extends StatelessWidget {
 
                       Navigator.push(context, MaterialPageRoute(builder: (context) => ContactScreen()));
                      
+                    },
+                  ),
+
+                    _buildGridButton(
+                    icon: Icons.bloodtype,
+                    label: 'Donate Blood',
+                    onTap: () {
+                      
                     },
                   ),
                 ],
