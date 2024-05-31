@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:blood_donor/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class emergencyScreen extends StatefulWidget {
   const emergencyScreen({super.key});
@@ -21,11 +24,13 @@ class emergencyScreen extends StatefulWidget {
 
 class _emergencyrequest extends State<emergencyScreen> {
 Position? currentLocation;
-  File? image;
+
   final pnameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
+
   final groupController = TextEditingController();
+String selectedAddress = 'Home Address'; 
 
   @override
   void dispose() {
@@ -35,17 +40,13 @@ Position? currentLocation;
     groupController.dispose();
   }
 
-  // for selecting image
-  void selectImage() async {
-    image = await pickImage(context);
-    setState(() {});
-  }
+
 
   @override
   Widget build(BuildContext context) {
    
      final ap = Provider.of<AuthProvider>(context, listen: false);
-      String selectedAddress = 'Defult Adress';
+      
     final isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
     return Scaffold(
@@ -71,8 +72,8 @@ Position? currentLocation;
             ? const Center(
                 child: SpinKitFadingCircle(
                   color:
-                      Color.fromARGB(255, 236, 50, 53), // Customize the color
-                  size: 50.0, // Customize the size
+                      Color.fromARGB(255, 236, 50, 53), 
+                  size: 50.0, 
                 ),
               )
             : SingleChildScrollView(
@@ -82,9 +83,10 @@ Position? currentLocation;
                   child: Column(
                     children: [
                       
+                      
                             Container(
-                              width: 170,
-                              height: 170,
+                              width: 100,
+                              height: 100,
                               padding: const EdgeInsets.all(5.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
@@ -93,6 +95,7 @@ Position? currentLocation;
                               child: Image.asset("assets/emergency.png"),
                             ),
 
+                   
                             
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -147,9 +150,9 @@ Position? currentLocation;
                 setState(() {
                   selectedAddress = value.toString();
                   if (selectedAddress == 'Use Device Location') {
-                   // _getCurrentLocation();
+                    _getCurrentLocation();
                   } else {
-                   // currentLocation = null;
+                    currentLocation = null;
                   }
                 });
               },
@@ -201,10 +204,11 @@ Position? currentLocation;
                     )
                   : SpinKitFadingCircle(
                       color: Color.fromARGB(
-                          255, 196, 193, 6), // Customize the color
-                      size: 25.0, // Customize the size
+                          173, 228, 86, 86), 
+                      size: 25.0, 
                     ),
-                            // bio
+                           
+                           
                             textFeld(
                               hintText: "Wich blood group You need ?",
                               icon: Icons.edit,
@@ -224,7 +228,27 @@ Position? currentLocation;
                         width: MediaQuery.of(context).size.width * 0.90,
                         child: CustomButton(
                           text: "Request Blood",
-                          onPressed: () => {},
+                          onPressed: () async {
+
+
+                            if(selectedAddress == 'Home Address')
+                            {
+                              await sendMessage(groupController.text , ap.userModel.adress , ap.userModel.email);
+                            }
+                            else if(selectedAddress == 'Enter New Address')
+                            {
+                               await sendMessage(groupController.text , addressController.text , ap.userModel.email);
+                            }
+                            else if(selectedAddress  == 'Use Device Location')
+                            {
+                              String link  =  'https://www.google.com/maps?q=${currentLocation!.latitude},${currentLocation!.longitude}';
+                               await sendMessage(groupController.text , link , ap.userModel.email);
+                            }
+                          else {
+
+                          }
+
+                          },
                         ),
                       )
                     ],
@@ -287,6 +311,7 @@ Position? currentLocation;
 
       setState(() {
         currentLocation = position;
+      
       });
     } catch (e) {
       print('Error fetching location: $e');
@@ -337,11 +362,51 @@ Widget textFeldx({
           hintText: hintText,
           alignLabelWithHint: true,
           border: InputBorder.none,
-          fillColor: Color.fromARGB(255, 174, 172, 172),
+          fillColor: Color.fromARGB(255, 218, 102, 102),
           filled: true,
         ),
       ),
     );
   }
+
+
+  //function for send tg message 
+   final String botToken = '7409282338:AAGjqSiWYD9MxXucJCJwZzbb_MTywp9RdSE';
+  final String chatId = '@emergency_blood_requests';
+
+  Future<void> sendMessage(String bloodType, String location, String contactEmail) async {
+    final String message = '''
+      Blood Type: $bloodType
+      Location: $location
+      Contact Email: $contactEmail
+    ''';
+
+    final String telegramURL = 'https://api.telegram.org/bot$botToken/sendMessage';
+    final Map<String, String> headers = {'Content-Type': 'application/json'};
+    final Map<String, dynamic> body = {
+      'chat_id': chatId,
+      'text': message,
+    };
+
+    try {
+      final response = await http.post(Uri.parse(telegramURL), headers: headers, body: jsonEncode(body));
+      if (response.statusCode == 200) {
+       
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Successfully notified worldwide members'),
+          backgroundColor: Colors.green,
+        ));
+      } else {
+        throw Exception('Failed to send message');
+      }
+    } catch (error) {
+      
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Failed to send message'),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
   
 }
